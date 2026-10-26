@@ -10,6 +10,7 @@ const SHELL = [
   "/arena",
   "/scorecard",
   "/docs",
+  "/status",
   "/install",
   "/present",
   "/report",
