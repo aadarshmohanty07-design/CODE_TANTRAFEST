@@ -11,6 +11,7 @@ const TOUR = [
   { href: "/scorecard", label: "Scorecard", note: "what is proven" },
   { href: "/live", label: "Live chain", note: "local Hardhat reads" },
   { href: "/status", label: "Signer preflight", note: "account, chain and hardware checks" },
+  { href: "/approvals", label: "Access approvals", note: "two-person server, local model review" },
   { href: "/present", label: "Presentation", note: "seven-slide deck" },
 ];
 
@@ -54,8 +55,8 @@ export default function DocsPage() {
         <div className="doc-folio">Documentation</div>
         <div className="doc-folio mt-1">26 Oct 2026</div>
         <div className="mt-7 border-t border-edge pt-3">
-          <div className="doc-note">10 screens</div>
-          <div className="doc-note mt-1">Local chain</div>
+          <div className="doc-note">11 screens</div>
+          <div className="doc-note mt-1">Local chain and Ollama</div>
           <div className="doc-note mt-1">Reference model labelled</div>
         </div>
       </aside>

@@ -17,6 +17,7 @@ const NAV = [
   { href: "/arena", label: "Arena" },
   { href: "/scorecard", label: "Scorecard" },
   { href: "/live", label: "Live" },
+  { href: "/approvals", label: "Approvals" },
   { href: "/docs", label: "Docs" },
 ];
 
@@ -27,6 +28,7 @@ function isActive(pathname: string, href: string): boolean {
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const approvals = pathname.startsWith("/approvals");
 
   if (pathname === "/present") {
     return <>{children}</>;
@@ -39,12 +41,16 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           AEGIS
         </Link>
         <span className="app-rail-rule" />
-        <span className="app-rail-meta">IntentLock, Vol. 2</span>
+        <span className="app-rail-meta">
+          {approvals ? "Approvals, Vol. 1" : "IntentLock, Vol. 2"}
+        </span>
       </aside>
 
       <div className="app-rail-r" aria-hidden="true">
         <span className="app-dot" />
-        <span className="app-rail-meta">Local, 31337</span>
+        <span className="app-rail-meta">
+          {approvals ? "Local Ollama" : "Local, 31337"}
+        </span>
       </div>
 
       <header className="app-header">
@@ -56,7 +62,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             </span>
           </Link>
 
-          <span className="app-header-note">Working papers</span>
+          <span className="app-header-note">
+            {approvals ? "Shared access approvals" : "Working papers"}
+          </span>
 
           <nav className="app-nav" aria-label="Primary">
             {NAV.map((item) => {
@@ -74,20 +82,24 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </nav>
 
           <div className="app-header-actions">
-            <SignerTag />
-            <JudgeMode />
-            <Link
-              href="/present"
-              aria-label="Presentation mode"
-              title="Full-screen presentation"
-              className="app-header-link"
-            >
-              <MonitorPlay size={11} strokeWidth={1.8} />
-              <span className="hidden xl:inline">Present</span>
-            </Link>
+            {approvals ? null : (
+              <>
+                <SignerTag />
+                <JudgeMode />
+                <Link
+                  href="/present"
+                  aria-label="Presentation mode"
+                  title="Full-screen presentation"
+                  className="app-header-link"
+                >
+                  <MonitorPlay size={11} strokeWidth={1.8} />
+                  <span className="hidden xl:inline">Present</span>
+                </Link>
+              </>
+            )}
             <span className="app-chain">
               <span className="status-dot text-safe" />
-              Local, 31337
+              {approvals ? "Local server" : "Local, 31337"}
             </span>
           </div>
         </div>
@@ -116,7 +128,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <div className="app-footer-inner">
           <p>AegisDAO IntentLock, AIP-042, editorial edition</p>
           <div className="flex flex-wrap items-center gap-4">
-            <p>Reference model, wallet data simulated, live chain at /live</p>
+            <p>
+              {approvals
+                ? "Local Ollama, accounts and decisions stored on this server"
+                : "Reference model, wallet data simulated, live chain at /live"}
+            </p>
             <InstallApp />
           </div>
         </div>
